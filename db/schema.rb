@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_13_062703) do
+ActiveRecord::Schema.define(version: 2020_02_13_063929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,23 @@ ActiveRecord::Schema.define(version: 2020_02_13_062703) do
     t.index ["store_id"], name: "index_delivery_boys_on_store_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.money "total_amount", scale: 2
+    t.money "total_rent", scale: 2
+    t.money "refund_amount", scale: 2
+    t.string "status"
+    t.string "payment_mode"
+    t.string "payment_status"
+    t.date "order_date"
+    t.daterange "time_period"
+    t.bigint "customer_id", null: false
+    t.bigint "delivery_boy_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["delivery_boy_id"], name: "index_orders_on_delivery_boy_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.string "name"
     t.text "address"
@@ -48,4 +65,6 @@ ActiveRecord::Schema.define(version: 2020_02_13_062703) do
   end
 
   add_foreign_key "delivery_boys", "stores"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "delivery_boys"
 end

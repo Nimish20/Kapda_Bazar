@@ -1,4 +1,6 @@
 class Customer < ApplicationRecord
+  has_many :orders, dependent: :destroy
+
   validates :name, :address, :email, :postal_code, :gender, :password,
             :number, presence: true
   validates :email, uniqueness: true

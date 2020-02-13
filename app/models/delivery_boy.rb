@@ -1,4 +1,5 @@
 class DeliveryBoy < ApplicationRecord
+  has_many :orders
   belongs_to :store
 
   validates :name, :address, :phone_number, :email, :password, presence: true
