@@ -5,11 +5,9 @@ Rails.application.routes.draw do
         'sellers/sessions',confirmations: 'sellers/confirmations' }
   get 'welcome/index'
  
-  resources :categories
-  resources :products
   resources :customers
-  resources :stores
   resources :sellers do
+    resources :products
     member do
       get :confirm_email
     end

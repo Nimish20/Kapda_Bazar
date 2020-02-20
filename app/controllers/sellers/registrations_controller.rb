@@ -20,14 +20,12 @@ class Sellers::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    sign_in_after_change_password? ? products_path : new_seller_session_path
+    sign_in_after_change_password? ? seller_products_path(current_seller) : new_seller_session_path
   end
 
   private
   
   def sign_in_after_change_password?
-    return true if account_update_params[:password].blank?
-
-    false
+    account_update_params[:password].blank?
   end
 end
