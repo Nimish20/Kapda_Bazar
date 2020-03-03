@@ -1,0 +1,59 @@
+<% if current_customer == nil %>
+  <nav class="navbar navbar-dark bg-dark">
+    <hr><%= link_to 'Home', market_places_path, method: :get, class: "navbar-brand" %><hr>
+    <%= link_to 'Log in', new_customer_session_path, class: "navbar-brand" %><hr>
+    <%= link_to 'Sign Up', new_customer_registration_path, method: :get, class: "navbar-brand" %><hr>
+  </nav>
+<% end %>
+<% unless @cart_item.empty? %>
+  <div class="container-fluid">
+    <% @total_payble = 0 %>
+    <% @total_rent = 0 %>
+    <% @cart_item.each do |item| %>
+      <div class="row justify-content-md-center">
+        <div class="col-3">
+          <lable>Name</lable>
+          <%= item.product_name %>
+        </div>
+        <div class="col-3">
+          <label>Price</label>
+          <%= item.price %>
+        </div>
+        <div class="col-3">
+          <lable>Rent</lable>
+          <%= item.rent_cost %>
+        </div>
+        <% @total_payble += item.price %>
+        <% @total_rent += item.rent_cost %>
+        <div class="col-1">
+          <%= link_to 'remove', cart_item_path(item.id), method: :delete, class: "btn btn-info" %>
+        </div>
+      </div><hr>
+    <% end %>
+    <div class="row">
+      <div class="col-4 ">
+        <lable>Total Payble</lable>
+        <%= @total_payble %>
+      </div>
+      <div class="col-4">
+        <lable>Total Rent</lable>
+        <%= @total_rent %>
+      </div>
+      <div class="col-4">
+        <lable>Refundable Amount</lable>
+        <%= @total_payble - @total_rent %>
+      </div><hr>
+    </div>
+    <div class="row">
+      <div class="col-6 offset-3">
+        <%= link_to 'CheckOut', new_order_path, method: :get, class: "btn btn-success" %>
+      </div><hr>
+    </div><hr>
+  </div>
+<% else %>
+  <center>
+    <div class="Empty">
+      <h1>Cart is Empty !!!</h1>
+    </div>
+  </center>
+<% end %>
