@@ -1,0 +1,12 @@
+<div class="container bg-light" >
+
+  <center><h1>Edit Product Details</h1></center>
+
+  <%= form_with model: @product, url: seller_product_path(@product), local: true do |form|%>
+    <%= render partial: 'form', locals: {form: form} %>
+    <div> 
+      <p><%= form.submit"Update" , class: "btn btn-success mb-3"  %></p>
+    </div>
+  <%end%>
+  <%= link_to 'back', seller_products_path%>
+</div>

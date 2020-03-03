@@ -1,0 +1,67 @@
+<% if current_seller == nil %>
+  <nav class="navbar navbar-dark bg-dark">
+    <%= link_to 'Log in', new_seller_session_path, class: "navbar-brand" %><hr>
+    <%= link_to 'Sign Up', new_seller_registration_path, method: :get, class: "navbar-brand" %><hr>
+  </nav>
+<% end %>
+<div class="container">
+  <center>
+    <div id="cr" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <% @product.image.each do |image| %>
+          <% if image == @product.image.first %>
+            <div class="carousel-item active">
+                <%= image_tag image.variant(resize_to_limit: [350, 350]), class: "l-100" %>
+            </div>
+          <% else %>
+            <div class="carousel-item">
+              <%= image_tag image.variant(resize_to_limit: [350, 350]), class: "l-100" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <a class="carousel-control-prev" href="#cr" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#cr" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <table>
+      <tbody>
+        <tr>
+          <th scope="row">Name </th>
+          <td><%= @product.name %></td>
+        </tr>
+        <tr>
+          <th scope="row">Size </th>
+          <td><%= @product.size %></td>
+        </tr>
+        <tr>
+          <th scope="row">Color </th>
+          <td><%= @product.color %></td>
+        </tr>
+        <tr>
+          <th scope="row">Price </th>
+          <td><%= @product.price %></td>
+        </tr>
+        <tr>
+          <th scope="row">Rent </th>
+          <td><%= @product.rent_cost %></td>
+        </tr>
+        <% unless current_seller.nil? %>
+          <tr>
+            <td>
+              <%= link_to 'Edit', edit_seller_product_path(current_seller, @product) %>
+            </td>
+            <td>
+              <%= link_to 'Destroy', seller_product_path(current_seller, @product), method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </center>
+</div>

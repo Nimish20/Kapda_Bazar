@@ -1,0 +1,56 @@
+<div class="form-group">
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, class: "form-control"  %>
+  </p>
+</div>
+
+<div class="form-group">
+  <p>
+    <%= form.label :size %><br>
+    <%= form.text_field :size, class: "form-control" %>
+  </p>
+</div>
+
+<div class="form-group">
+  <p>
+    <%= form.label :color %><br>
+    <%= form.text_field :color, class: "form-control" %>
+  </p>
+</div>
+
+<div class="form-group">
+  <p>
+    <%= form.label :image %><br>
+    <%= form.file_field :image, multiple: true, class: "form-control-file" %>
+  </p>
+</div>
+
+<div class="form-group">
+  <p>
+    <%= form.label :price %><br>
+    <%= form.text_field :price, class: "form-control" %>
+  </p>
+</div>
+
+<div class="form-group">
+  <p>
+    <%= form.label :rent_cost %><br>
+    <%= form.text_field :rent_cost, class: "form-control" %>
+  </p>
+</div>
+
+<p>
+  <%= form.text_field :store_id,value: current_seller.store.id, hidden: true %>
+</p>
+
+
+<p>
+  <%= form.label :category %><br>
+  <%= form.select(:category_id,[],{},{class: :"form-control"}) do %>
+
+    <% Category.all.each do |category| %>
+      <%= content_tag(:option, category.name, value: category.id) %>
+    <% end %>
+  <% end %>
+</p>
