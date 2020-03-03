@@ -1,0 +1,27 @@
+<% if @delivery_boy.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <h2 class="alert-heading">
+      <%= pluralize(@delivery_boy.errors.count, "error") %> prohibited
+      this product from being saved:
+    </h2>
+    <ul>
+      <% @delivery_boy.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div class="container bg-light" >
+  <center><h1>Enter delivery Person's Details</h1></center>
+
+  <%= form_with model: @delivery_boy, url: seller_delivery_boys_path, local: true do |form| %>
+    <%= render partial: 'form', locals: {form: form} %>
+    <p>
+      <%= form.text_field :store_id,value: current_seller.store.id, hidden: true %>
+    </p>
+
+    <div> 
+      <p><%= form.submit "Add Delivery Person" , class: "btn btn-success mb-3"  %></p>
+    </div>
+  <% end %>
+</div>

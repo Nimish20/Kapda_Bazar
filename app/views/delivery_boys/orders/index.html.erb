@@ -1,0 +1,53 @@
+<% if session[:current_delivery_boy].nil? %>
+  <nav class="navbar navbar-dark bg-dark">
+    <hr><%= link_to 'Home', delivery_boys_orders_path, method: :get, class: "navbar-brand" %><hr>
+    <%= link_to 'Log in', new_delivery_boys_session_path, class: "navbar-brand" %><hr>
+  </nav>
+<% end %>
+<div class="container-fluid">
+  <% @orders.where(status: "processing").each do |order| %>
+    <div class="row justify-content-md-center">
+      <div class="col-3">
+        <lable>Order Details</lable>
+      </div>
+      <div class="col-3">
+        <lable>Total Products</lable>
+        <%= order.cart.cart_items.count %>
+      </div>
+      <div class="col-3">
+        <lable>Order Value</lable>
+        <%= order.total_amount %>
+      </div>
+      <div class="col-3">
+        <label>Payment Status</label>
+        <%= order.payment_status %>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-3">
+        <label>Customer's Details</label>
+      </div>
+      <div class="col-3">
+        <label>Name :- </label>
+        <%= order.customer.name %>
+      </div>
+      <div class="col-3">
+        <label>Contact number :- </label>
+        <%= order.customer.number %>
+      </div>
+      <div class="col-3">
+        <label>E-Mail :- </label>
+        <%= order.customer.email %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-10">
+        <label>Address :- </label>
+        <%= order.customer.address %>
+      </div>
+      <div class="col-2">
+        <%= link_to 'Delivered', delivery_boys_order_path(order.id) , method: :patch, class: "btn btn-info" %>
+      </div>
+    </div><hr>
+  <% end %>
+</div>

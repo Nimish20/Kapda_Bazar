@@ -1,0 +1,9 @@
+<div class="container bg-light" >
+  <center><h1>Edit your details</h1></center>
+  <%= form_with model: @delivery_boy,url: delivery_boys_registration_path, method: :patch, local: true do |form| %>
+    <%= render partial: 'form', locals: {form: form} %>
+    <div> 
+      <p><%= form.submit "Add Delivery Person" , class: "btn btn-success mb-3"  %></p>
+    </div>
+  <% end %>
+</div>

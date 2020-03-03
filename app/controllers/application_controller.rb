@@ -1,14 +1,27 @@
 class ApplicationController < ActionController::Base
+  PER_PAGE = 12
+
+  helper_method :current_cart
 
   def after_sign_in_path_for(resource)
-    seller_products_path(current_seller)
+    if resource.class == Seller
+      seller_products_path(current_seller)
+    else
+      market_places_path
+    end
   end
 
   def after_inactive_sign_up_path_for(resource)
-    seller_products_path(current_seller)
+    if resource.class == Seller
+      seller_products_path(current_seller)
+    else
+      market_places_path
+    end
   end
 
-  def after_sign_out_path_for(resource)
-    stored_location_for(resource) || new_seller_session_path
+ 
+  def current_cart
+    current_customer.carts.last
   end
+
 end

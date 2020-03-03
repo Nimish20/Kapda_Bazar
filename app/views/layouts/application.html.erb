@@ -8,7 +8,34 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+<% unless current_customer.nil? %>
+  <nav class="navbar navbar-dark bg-dark">
+    <%= link_to 'Home', market_places_path, method: :get, class: "navbar-brand" %><hr>
+    <%= link_to 'View Cart', cart_items_path, method: :get, class: "navbar-brand" %><hr>
+    <%= link_to 'My Orders', orders_path, method: :get, class: "navbar-brand" %><hr>
+    <%= link_to 'Edit Profile', edit_customer_registration_path, method: :get, class: "navbar-brand" %><hr>
+    <%= link_to 'Log out', destroy_customer_session_path, method: :delete, class: "navbar-brand" %><hr>
+  </nav>
+<% end %>
 
+<% unless current_seller.nil? %>
+  <nav class="navbar navbar-dark bg-dark">
+    <%= link_to 'Log out', destroy_seller_session_path, method: :delete, class: "navbar-brand" %><hr>
+    <%= link_to 'Edit Profile', edit_seller_registration_path, method: :get, class: "navbar-brand" %><hr>
+    <%= link_to 'new product', new_seller_product_path(current_seller), class: "navbar-brand" %><hr>
+    <%= link_to 'Add Delivery Person', new_seller_delivery_boy_path(current_seller), class: "navbar-brand" %>
+  </nav>
+<% end %>
+<% unless session[:current_delivery_boy] == nil %>
+  <nav class="navbar navbar-dark bg-dark">
+    <%= link_to 'Home', delivery_boys_orders_path, class: "navbar-brand" %><hr>
+    <%= link_to 'Edit Profile',edit_delivery_boys_registration_path(session[:current_delivery_boy]["id"]), class: "navbar-brand" %><hr>
+    <%= link_to 'Statistics', class: "navbar-brand" %><hr>
+    <%= link_to 'Log out', delivery_boys_session_path(session[:current_delivery_boy]["id"]), method: :delete, class: "navbar-brand" %>
+  </nav>
+<% end %>
+
+<%= render partial: 'layouts/flash' %>
   <body>
     <%= yield %>
   </body>
