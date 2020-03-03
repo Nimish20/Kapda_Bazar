@@ -1,0 +1,45 @@
+<% if current_customer == nil %>
+  <nav class="navbar navbar-dark bg-dark">
+    <hr><%= link_to 'Home', market_places_path, method: :get, class: "navbar-brand" %><hr>
+    <%= link_to 'Log in', new_customer_session_path, class: "navbar-brand" %><hr>
+    <%= link_to 'Sign Up', new_customer_registration_path, method: :get, class: "navbar-brand" %><hr>
+  </nav>
+<% end %>
+<div class="container-fluid">
+  <% @orders.where(status: "processing").each do |order| %>
+    <div class="row justify-content-md-center">
+      <div class="col-3">
+        <lable>Order Details</lable>
+      </div>
+      <div class="col-3">
+        <lable>Total Products</lable>
+        <%= order.cart.cart_items.count %>
+      </div>
+      <div class="col-3">
+        <lable>Order Value</lable>
+        <%= order.total_amount %>
+      </div>
+      <div class="col-3">
+        <label>Refund</label>
+        <%= order.refund_amount %>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-3">
+        <label>Delivery person Details</label>
+      </div>
+      <div class="col-3">
+        <label>Name :- </label>
+        <%= order.delivery_boy.name %>
+      </div>
+      <div class="col-3">
+        <label>Contact number :- </label>
+        <%= order.delivery_boy.phone_number %>
+      </div>
+      <div class="col-3">
+        <label>E-Mail :- </label>
+        <%= order.delivery_boy.email %>
+      </div>
+    </div><hr>
+  <% end %>
+</div>
