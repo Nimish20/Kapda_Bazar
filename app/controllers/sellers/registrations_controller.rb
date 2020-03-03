@@ -7,6 +7,7 @@ class Sellers::RegistrationsController < Devise::RegistrationsController
     @seller.build_store
   end
 
+
   protected
 
   def sign_up_params
@@ -24,8 +25,8 @@ class Sellers::RegistrationsController < Devise::RegistrationsController
   end
 
   private
-  
   def sign_in_after_change_password?
     account_update_params[:password].blank?
   end
+
 end
