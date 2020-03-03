@@ -7,6 +7,7 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.boolean :availability, default: true
       t.money :price
       t.money :rent_cost
+      t.belongs_to :store, null: false, foreign_key: true
 
       t.timestamps
     end
