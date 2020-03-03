@@ -9,7 +9,7 @@ class DeliveryBoys::RegistrationsController < ApplicationController
     if @delivery_boy.save
       DeliveryBoyMailer.with(delivery_boy: @delivery_boy).welcome_email.deliver_later
       flash[:primary] = "Delivery Person added Succesfully"
-      redirect_to seller_products_path
+      redirect_to seller_products_path(current_seller)
     end
   end
 

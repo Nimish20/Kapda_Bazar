@@ -14,7 +14,7 @@
 <div class="container bg-light" >
   <center><h1>Enter delivery Person's Details</h1></center>
 
-  <%= form_with model: @delivery_boy, url: seller_delivery_boys_path, local: true do |form| %>
+  <%= form_with model: @delivery_boy, url: delivery_boys_registrations_path, method: :post, local: true do |form| %>
     <%= render partial: 'form', locals: {form: form} %>
     <p>
       <%= form.text_field :store_id,value: current_seller.store.id, hidden: true %>
