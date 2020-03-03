@@ -1,0 +1,29 @@
+<% if current_customer == nil %>
+  <nav class="navbar navbar-dark bg-dark">
+    <hr><%= link_to 'Home', market_places_path, method: :get, class: "navbar-brand" %><hr>
+    <%= link_to 'Log in', new_customer_session_path, class: "navbar-brand" %><hr>
+    <%= link_to 'Sign Up', new_customer_registration_path, method: :get, class: "navbar-brand" %><hr>
+  </nav>
+<% end %>
+<div class="container-fluid">
+  <% @stores.each do |store| %>
+    <div class="row justify-content-md-center">
+      <div class="col-3">
+        <lable>Store Name</lable>
+        <%= store.name %>
+      </div>
+      <div class="col-3">
+        <label>Address</label>
+        <%= store.address %>
+      </div>
+      <div class="col-3">
+        <%= link_to 'view products', market_place_path(id: store.id), class: "btn btn-info" %>
+      </div>
+    </div><hr>
+  <% end %>
+  <div class="digg_pagination">
+  <div class="page-items">
+      <%= will_paginate @stores, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+  </div>
+</div>
