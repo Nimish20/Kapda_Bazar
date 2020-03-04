@@ -38,7 +38,7 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  config.action_mailer.default_url_options = { host: 'https://kapdabazar.herokuapp.com/'}
+  config.action_mailer.default_url_options = { host: 'kapdabazar.herokuapp.com', protocol: 'http' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_options = {from: 'nimishgupta35@gmail.com'}
@@ -46,7 +46,7 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     port: 587,
     user_name: 'nimishgupta35@gmail.com',
-    password: 'password1997',
+    password: 'password1997', 
     authentication: 'plain',
     enable_starttls_auto: true
   }
