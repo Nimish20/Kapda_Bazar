@@ -19,6 +19,5 @@ class Order < ApplicationRecord
     self.payment_status ="Pending"
     self.order_date = Date.today
     self.time_period = (Date.today..Date.today+7.day)
-    binding.pry
   end
 end
