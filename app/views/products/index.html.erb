@@ -9,7 +9,7 @@
     <% @products.each do |product| %>
         <div class="col-4">
           <center>
-            <a href="/products/<%=product.id%>"><%= image_tag product.image.first.variant(resize_to_limit: [250, 250]) %></a><br>
+            <a href="seller/<%=current_seller.id%>/products/<%=product.id%>"><%= image_tag product.image.first.variant(resize_to_limit: [250, 250]) %></a><br>
             <table>
               <tbody>
                 <tr>
